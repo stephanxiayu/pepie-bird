@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="./styles/styles.css" />
+    <title>Pepie Bird</title>
+    <link rel="icon" type="image/x-icon" href="./images/favicon.ico" />
+  </head>
+  <body>
+    <main>
+      <!-- #game-intro is initially shown on the game start screen -->
+
+      <div id="game-intro">
+        <audio
+          id="start-screen-audio"
+          src="./music/tetris.mp3"
+          preload="auto"
+        ></audio>
+        <img src="./images/start-screen1.png" alt="" class="logo-img" />
+
+        <button class="start-button" id="start-button">Start Game</button>
+      </div>
+      <div id="game-container" style="display: none">
+        <div id="pipe"></div>
+        <div id="none-pipe"></div>
+        <div id="bird"></div>
+        <img src="./images/flappy-bird-background.jpeg" alt="" class="bg-img" />
+        <audio
+          id="game-screen-audio"
+          src="./music/flappy.mp3"
+          preload="auto"
+        ></audio>
+        <img
+          src="./images/kisspng-flappy-bird-flight-clip-art-bird-frame-5b36bf58233c85.0941024815303145841443.png"
+          alt=""
+          id="pepie"
+          class="pepie-img"
+        />
+        <!-- Weitere Spielinhalte... -->
+      </div>
+    </main>
+    <!-- #welche js files do you need -->
+
+    <script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript" src="js/game.js"></script>
+  </body>
+</html>

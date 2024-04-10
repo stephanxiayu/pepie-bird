@@ -1,0 +1,93 @@
+#game-intro,
+.logo-img {
+  background-image: url(../images/start-screen1.png);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  /* Sorgt dafür, dass das Bild den Container vollständig abdeckt */
+  background-size: cover;
+
+  /* Zentriert das Bild */
+  background-position: center;
+}
+
+.logo-img {
+  position: fixed; /* oder `absolute`, wenn es relativ zum nächstgelegenen positionierten Vorfahren positioniert werden soll */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  /* Sorgt dafür, dass das Bild den Container vollständig abdeckt, ohne sein Seitenverhältnis zu verlieren */
+  object-fit: cover;
+}
+
+.bg-img {
+  /* Stelle sicher, dass das Hintergrundbild den Container vollständig ausfüllt */
+  width: 100%; /* oder deine spezifische Größe */
+  height: auto; /* behält das Seitenverhältnis bei */
+  position: relative; /* Wichtig für z-index */
+  z-index: 1; /* Hintergrundbild-Ebene */
+}
+
+.pepie-img {
+  height: 50px;
+  width: 50px;
+  position: absolute; /* Erlaubt spezifische Positionierung innerhalb des Containers */
+  z-index: 2; /* Vordergrund */
+  top: 50%; /* Beispiel zur Positionierung */
+  left: 50%;
+  transform: translate(-50%, -50%); /* Zentriert das Bild */
+}
+.start-button {
+  position: absolute; /* Absolute Positionierung innerhalb des #game-intro */
+  bottom: 40px; /* Abstand vom unteren Rand des übergeordneten Elements */
+  left: 50%; /* Setzt den linken Rand des Buttons in die Mitte des übergeordneten Elements */
+  transform: translateX(
+    -50%
+  ); /* Verschiebt den Button um die Hälfte seiner eigenen Breite nach links, um ihn exakt zu zentrieren */
+  color: black;
+
+  font-size: 50px;
+
+  background-color: #dd00ae;
+  border: 2px;
+  border-color: pink;
+  /* Verschiebt den Button zurück um seine eigene halbe Breite und Höhe, um ihn genau zu zentrieren */
+  animation: flickerAnimation 1s linear infinite;
+  /* Weitere Stildefinitionen für den Button */
+}
+@keyframes flickerAnimation {
+  0%,
+  100% {
+    border-radius: 0%;
+    background-color: #ff00ff;
+  } /* Neon Pink */
+  50% {
+    border-radius: 50%;
+    background-color: #f4f404;
+  } /* Pink */
+}
+#pipe {
+  width: 50px;
+  height: 500px;
+  background-color: green;
+  position: relative;
+  left: 400px;
+  animation: block 2s linear infinite;
+  z-index: 2; /* Stellen Sie sicher, dass dies höher ist als das z-index des Hintergrundbildes */
+}
+.none-pipe {
+}
+
+@keyframes block {
+  0% {
+    left: 400px;
+  }
+  100% {
+    left: -50px;
+  }
+}
