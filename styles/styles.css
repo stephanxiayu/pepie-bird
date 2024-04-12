@@ -1,3 +1,13 @@
+/* Entferne die Standard-Margin und Padding */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* verhindert das Scrollen */
+}
+
+/*    Game CSS   */
+
 #game-intro,
 .logo-img {
   background-image: url(../images/start-screen1.png);
@@ -60,6 +70,24 @@
   animation: flickerAnimation 1s linear infinite;
   /* Weitere Stildefinitionen für den Button */
 }
+
+.restart-button {
+  position: absolute; /* Absolute Positionierung innerhalb des #game-intro */
+  bottom: 40px; /* Abstand vom unteren Rand des übergeordneten Elements */
+  left: 50%; /* Setzt den linken Rand des Buttons in die Mitte des übergeordneten Elements */
+  transform: translateX(
+    -50%
+  ); /* Verschiebt den Button um die Hälfte seiner eigenen Breite nach links, um ihn exakt zu zentrieren */
+  color: black;
+
+  font-size: 50px;
+
+  background-color: #dd00ae;
+  border: 2px;
+  border-color: pink;
+  /* Verschiebt den Button zurück um seine eigene halbe Breite und Höhe, um ihn genau zu zentrieren */
+  animation: flickerAnimation 1s linear infinite;
+}
 @keyframes flickerAnimation {
   0%,
   100% {
@@ -71,23 +99,66 @@
     background-color: #f4f404;
   } /* Pink */
 }
-#pipe {
-  width: 50px;
-  height: 500px;
-  background-color: green;
-  position: relative;
-  left: 400px;
-  animation: block 2s linear infinite;
-  z-index: 2; /* Stellen Sie sicher, dass dies höher ist als das z-index des Hintergrundbildes */
-}
-.none-pipe {
+
+/* Game Container */
+#game-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw; /* Viewport-Breite */
+  height: 100vh; /* Viewport-Höhe */
+  background-image: url("../images/test.png");
+  background-size: cover;
+  background-size: 100%; /* Ändere diese zu 'auto 100%', um die Höhe zu erhalten und die Breite entsprechend anzupassen */
+  background-repeat: repeat-x; /* Erlaube dem Bild, sich horizontal zu wiederholen */
+  z-index: 1; /* Niedrigerer z-index als game-intro */
+  animation: scrollBackground 5s linear infinite; /* 10s ist die Dauer der Animation */
 }
 
-@keyframes block {
+/* Bird-Image */
+.bird {
+  width: 50px;
+  height: 50px;
+  background: url("./images/kisspng-flappy-bird-flight-clip-art-bird-frame-5b36bf58233c85.0941024815303145841443.png")
+    no-repeat center;
+  background-size: contain;
+}
+@keyframes scrollBackground {
   0% {
-    left: 400px;
+    background-position: 0 0;
   }
   100% {
-    left: -50px;
+    background-position: -1000px 0; /* Stelle sicher, dass dies die Breite deines Bildes ist oder ein Vielfaches davon */
   }
+}
+
+@keyframes moveDing {
+  0% {
+    right: -50px; /* Starte außerhalb des Bildschirms (Annahme, dass das Objekt 50px breit ist) */
+  }
+  100% {
+    right: 100%; /* Bewege dich nach links außerhalb des Bildschirms */
+  }
+}
+/* Ding-Objekt */
+.ding {
+  background: url("../images/ding.png") no-repeat center;
+  width: 100px; /* Verdoppelte Breite */
+  height: 300px; /* Verdoppelte Höhe */
+  background-size: contain;
+  position: absolute;
+  top: 0;
+  right: 0;
+  animation: moveDing 5s linear infinite;
+  z-index: 2;
+}
+#game-loser {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw; /* Viewport-Breite */
+  height: 100vh; /* Viewport-Höhe */
+  background-image: url("../images/loser.png");
+  background-size: cover;
+  background-repeat: no-repeat;
 }

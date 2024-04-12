@@ -1,32 +1,36 @@
+// Hauptinitialisierung
+let game; // Definiere `game` im globalen Scope
+
 window.onload = function () {
-  // Starte das Audio bei einem Klick irgendwo auf dem Bildschirm.
-  // Beachte, dass dies aufgrund von Browser-Richtlinien möglicherweise nicht funktioniert, bis der Benutzer interagiert hat.
+  const startButton = document.getElementById("start-button");
+  const restartButton = document.getElementById("restart-button");
+  const gameAudio = document.getElementById("game-screen-audio");
+  const game = new Game();
+  const audioManager = new AudioManager();
+  startButton.addEventListener("click", () => {
+    game.start();
+  });
+
+  restartButton.addEventListener("click", () => {
+    game.restart(); // Lade die Seite neu, um das Spiel neu zu starten
+  });
+
   document.body.addEventListener(
     "click",
-    function playAudio() {
-      // var audio = document.getElementById("start-screen-audio1");
-      // audio
-      //   .play()
-      //   .catch((error) => console.error("Error playing the audio:", error));
+    () => {
+      // audioManager.playStartscreenAudio();
     },
     { once: true }
-  ); // Führe dies nur einmal aus.
-
-  // Wechsle zum Game-Screen, wenn der "Start Game"-Button geklickt wird.
-  document
-    .getElementById("start-button")
-    .addEventListener("click", function () {
-      // var audio = document.getElementById("start-screen-audio1");
-      // audio.pause(); // Stoppt die Wiedergabe des Audios
-      // audio.currentTime = 0;
-      document.getElementById("pepie");
-      document.getElementById("game-intro").style.display = "none";
-
-      // Zeige den Game-Screen an
-      document.getElementById("game-container").style.display = "block";
-      // var audio = document.getElementById("game-screen-audio1");
-      // audio
-      //   .play()
-      //   .catch((error) => console.error("Error playing the audio:", error));
-    });
+  );
+  document.addEventListener("keydown", (e) => {
+    if (e.code === "Space") {
+      if (game) {
+        game.bird.jump(); // Jetzt sollte `game` definiert sein
+      } else {
+        console.log("loser!");
+      }
+    }
+  });
 };
+
+// Füge noch Event-Listener für die Tastatureingabe hinzu, um den Vogel zu steuern

@@ -22,14 +22,15 @@
 
         <button class="start-button" id="start-button">Start Game</button>
       </div>
+
+      <!-- #game-Screen is initially shown on the game start screen -->
       <div id="game-container" style="display: none">
-        <div id="pipe"></div>
-        <div id="none-pipe"></div>
         <div id="bird"></div>
-        <img src="./images/flappy-bird-background.jpeg" alt="" class="bg-img" />
+        <div class="ding"></div>
+        <!-- <img src="./images/flappy-bird-background.jpeg" alt="" class="bg-img" /> -->
         <audio
           id="game-screen-audio"
-          src="./music/flappy.mp3"
+          src="./music/no-copyrights.mp3"
           preload="auto"
         ></audio>
         <img
@@ -40,10 +41,20 @@
         />
         <!-- Weitere Spielinhalte... -->
       </div>
+
+      <div id="game-loser" style="display: none">
+        <button class="restart-button" id="restart-button">
+          Restart LOSER?
+        </button>
+        <audio id="loser-audio" src="./music/loser.mp3" preload="auto"></audio>
+      </div>
     </main>
     <!-- #welche js files do you need -->
 
     <script type="text/javascript" src="js/script.js"></script>
     <script type="text/javascript" src="js/game.js"></script>
+    <script type="text/javascript" src="js/bird.js"></script>
+    <script type="text/javascript" src="js/ding.js"></script>
+    <script type="text/javascript" src="js/audio.js"></script>
   </body>
 </html>
