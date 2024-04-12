@@ -18,7 +18,7 @@ window.onload = function () {
   document.body.addEventListener(
     "click",
     () => {
-      // audioManager.playStartscreenAudio();
+      audioManager.playStartscreenAudio();
     },
     { once: true }
   );

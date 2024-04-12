@@ -162,3 +162,18 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+#timer {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: white;
+  font-size: 24px;
+  z-index: 100; /* Stelle sicher, dass der Timer über anderen Spielelementen angezeigt wird */
+}
+#time-list {
+  list-style: none; /* Entfernt die Aufzählungszeichen */
+  color: white; /* Setzt die Textfarbe */
+  font-size: 18px; /* Setzt die Schriftgröße */
+  /* Füge weitere Stile hinzu, wie z.B. padding, margin, etc. */
+}

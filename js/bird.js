@@ -14,8 +14,6 @@ class Bird {
   updatePosition(gravity) {
     this.velocity += gravity;
     this.yPosition += this.velocity;
-
-    // Aktualisiere die Position des Vogels im DOM
     this.element.style.top = `${this.yPosition}px`;
   }
 

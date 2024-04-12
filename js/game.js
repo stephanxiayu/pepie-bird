@@ -9,6 +9,25 @@ class Game {
     this.gameIsOver = false;
     this.gameLoopIntervalId = null;
     this.audioManager = new AudioManager();
+    this.startTime = null;
+    this.timerInterval = null;
+    this.playTimes = []; // Speichert die Spielzeitens
+  }
+
+  startTimer() {
+    this.startTime = Date.now();
+    this.timerInterval = setInterval(() => {
+      const elapsed = Date.now() - this.startTime;
+      const minutes = Math.floor(elapsed / 60000);
+      const seconds = ((elapsed % 60000) / 1000).toFixed(0);
+      document.getElementById("timer").textContent =
+        minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+    }, 1000); // Aktualisiere den Timer jede Sekunde
+  }
+
+  stopTimer() {
+    clearInterval(this.timerInterval);
+    document.getElementById("timer").textContent = "0:00"; // Timer zurücksetzen
   }
   checkCollision(element1, element2) {
     const rect1 = element1.getBoundingClientRect();
@@ -21,15 +40,42 @@ class Game {
       rect1.top > rect2.bottom
     );
   }
+  savePlayTime() {
+    const elapsed = Date.now() - this.startTime; // Millisekunden seit Spielstart
+    const secondsElapsed = Math.floor(elapsed / 1000); // Umwandlung in Sekunden
+    this.playTimes.push(secondsElapsed); // Füge die Zeit in Sekunden zur Liste hinzu
+    this.updateTimeList();
+  }
+
+  // Aktualisiere die Liste auf dem Loser-Screen mit den gespeicherten Zeiten
+  updateTimeList() {
+    const listElement = document.getElementById("time-list");
+    listElement.innerHTML = ""; // Lösche die bestehenden Listeneinträge
+
+    // Sortiere die Zeiten absteigend
+    const sortedTimes = this.playTimes.sort((a, b) => b - a);
+
+    // Konvertiere die Sekunden zurück in das `mm:ss`-Format für die Anzeige
+    sortedTimes.forEach((timeInSeconds) => {
+      const minutes = Math.floor(timeInSeconds / 60);
+      const seconds = timeInSeconds % 60;
+      const timeString = minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+
+      const listItem = document.createElement("li");
+      listItem.textContent = timeString;
+      listElement.appendChild(listItem);
+    });
+  }
   start() {
     // Verstecke das Intro und zeige das Spiel
     this.gameIntro.style.display = "none";
     this.gameContainer.style.display = "block";
+    this.startTimer();
     setInterval(() => this.addDing(), 2000);
     // Starte die Game-Loop
     this.audioManager.stopStartscreenAudio();
     this.gameLoopIntervalId = setInterval(this.gameLoop.bind(this), 1000 / 60);
-    // this.audioManager.playBackgroundAudio();
+    this.audioManager.playBackgroundAudio();
   }
 
   gameLoop() {
@@ -57,6 +103,8 @@ class Game {
     this.gameContainer.style.display = "none";
     this.gameLoserScreen.style.display = "block";
     this.gameIsOver = true;
+    this.savePlayTime(); // Speichere die aktuelle Spielzeit
+    this.stopTimer();
     this.audioManager.stopBackgroundAudio();
     this.audioManager.playLoserAudio();
   }
