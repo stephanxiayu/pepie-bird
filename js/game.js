@@ -31,16 +31,21 @@ class Game {
   }
 
   // doesnt work so far
-  checkCollision(element1, element2) {
-    const rect1 = element1.getBoundingClientRect();
-    const rect2 = element2.getBoundingClientRect();
-
-    return !(
-      rect1.right < rect2.left ||
-      rect1.left > rect2.right ||
-      rect1.bottom < rect2.top ||
-      rect1.top > rect2.bottom
-    );
+  didCollide() {
+    const playerRect = this.bird.element.getBoundingClientRect();
+    for (let ding of this.dings) {
+      // Gehe durch jedes Hindernis in der Liste
+      const obstacleRect = ding.element.getBoundingClientRect();
+      if (
+        playerRect.left < obstacleRect.right &&
+        playerRect.right > obstacleRect.left &&
+        playerRect.top < obstacleRect.bottom &&
+        playerRect.bottom > obstacleRect.top
+      ) {
+        return true; // Kollision gefunden, kehre sofort mit true zurück
+      }
+    }
+    return false; // Keine Kollision gefunden
   }
   // save the game time
   savePlayTime() {
@@ -84,6 +89,9 @@ class Game {
   // gameloob whats happend when the bird fall out of the screen
   gameLoop() {
     this.bird.updatePosition(this.gravity);
+    if (this.didCollide()) {
+      this.endGame();
+    }
 
     if (this.bird.isOffScreen()) {
       this.endGame();
@@ -105,6 +113,8 @@ class Game {
 
   // whats happend when the game end
   endGame() {
+    this.dings.length = 0;
+    this.dings = [];
     clearInterval(this.gameLoopIntervalId);
     this.gameContainer.style.display = "none";
     this.gameLoserScreen.style.display = "block";
