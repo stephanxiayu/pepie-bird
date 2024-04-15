@@ -3,7 +3,7 @@ class Game {
     this.gameContainer = document.getElementById("game-container");
     this.gameIntro = document.getElementById("game-intro");
     this.gameLoserScreen = document.getElementById("game-loser");
-    this.bird = new Bird(300); // Annahme, dass die y-Position des Vogels 300 ist
+    this.bird = new Bird(300);
     this.dings = [];
     this.gravity = 0.5;
     this.gameIsOver = false;
@@ -11,7 +11,7 @@ class Game {
     this.audioManager = new AudioManager();
     this.startTime = null;
     this.timerInterval = null;
-    this.playTimes = []; // Speichert die Spielzeitens
+    this.playTimes = [];
   }
   // start of the timer
   startTimer() {
@@ -89,6 +89,7 @@ class Game {
       this.endGame();
     }
   }
+
   // the green obsticale
   addDing() {
     const ding = new Ding(this.gameContainer);
@@ -125,7 +126,9 @@ class Game {
     this.gameContainer.style.display = "block";
 
     this.audioManager.stopLoserAudio();
-    this.audioManager.playGameAudio();
+
+    // *****   this play game audio creates a bug *****  aarrrrrfgggggh
+    // this.audioManager.playGameAudio();
 
     this.start();
   }

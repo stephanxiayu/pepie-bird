@@ -3,7 +3,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  overflow: hidden; /* verhindert das Scrollen */
+  overflow: hidden;
 }
 
 /*    Game CSS   */
@@ -17,48 +17,42 @@ body {
   width: 100%;
   height: 100%;
 
-  /* Sorgt dafür, dass das Bild den Container vollständig abdeckt */
   background-size: cover;
 
-  /* Zentriert das Bild */
   background-position: center;
 }
 
 .logo-img {
-  position: fixed; /* oder `absolute`, wenn es relativ zum nächstgelegenen positionierten Vorfahren positioniert werden soll */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
 
-  /* Sorgt dafür, dass das Bild den Container vollständig abdeckt, ohne sein Seitenverhältnis zu verlieren */
   object-fit: cover;
 }
 
 .bg-img {
-  /* Stelle sicher, dass das Hintergrundbild den Container vollständig ausfüllt */
-  width: 100%; /* oder deine spezifische Größe */
-  height: auto; /* behält das Seitenverhältnis bei */
-  position: relative; /* Wichtig für z-index */
-  z-index: 1; /* Hintergrundbild-Ebene */
+  width: 100%;
+  height: auto;
+  position: relative;
+  z-index: 1;
 }
 
 .pepie-img {
   height: 50px;
   width: 50px;
-  position: absolute; /* Erlaubt spezifische Positionierung innerhalb des Containers */
-  z-index: 2; /* Vordergrund */
-  top: 50%; /* Beispiel zur Positionierung */
+  position: absolute;
+  z-index: 2;
+  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* Zentriert das Bild */
+  transform: translate(-50%, -50%);
 }
 .start-button {
-  position: absolute; /* Absolute Positionierung innerhalb des #game-intro */
-  bottom: 40px; /* Abstand vom unteren Rand des übergeordneten Elements */
-  left: 50%; /* Setzt den linken Rand des Buttons in die Mitte des übergeordneten Elements */
-  transform: translateX(
-    -50%
-  ); /* Verschiebt den Button um die Hälfte seiner eigenen Breite nach links, um ihn exakt zu zentrieren */
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
   color: black;
 
   font-size: 50px;
@@ -66,18 +60,15 @@ body {
   background-color: #dd00ae;
   border: 2px;
   border-color: pink;
-  /* Verschiebt den Button zurück um seine eigene halbe Breite und Höhe, um ihn genau zu zentrieren */
+
   animation: flickerAnimation 1s linear infinite;
-  /* Weitere Stildefinitionen für den Button */
 }
 
 .restart-button {
-  position: absolute; /* Absolute Positionierung innerhalb des #game-intro */
-  bottom: 40px; /* Abstand vom unteren Rand des übergeordneten Elements */
-  left: 50%; /* Setzt den linken Rand des Buttons in die Mitte des übergeordneten Elements */
-  transform: translateX(
-    -50%
-  ); /* Verschiebt den Button um die Hälfte seiner eigenen Breite nach links, um ihn exakt zu zentrieren */
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
   color: black;
 
   font-size: 50px;
@@ -85,7 +76,7 @@ body {
   background-color: #dd00ae;
   border: 2px;
   border-color: pink;
-  /* Verschiebt den Button zurück um seine eigene halbe Breite und Höhe, um ihn genau zu zentrieren */
+
   animation: flickerAnimation 1s linear infinite;
 }
 @keyframes flickerAnimation {
@@ -105,14 +96,14 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100vw; /* Viewport-Breite */
-  height: 100vh; /* Viewport-Höhe */
+  width: 100vw;
+  height: 100vh;
   background-image: url("../images/test.png");
   background-size: cover;
-  background-size: 100%; /* Ändere diese zu 'auto 100%', um die Höhe zu erhalten und die Breite entsprechend anzupassen */
-  background-repeat: repeat-x; /* Erlaube dem Bild, sich horizontal zu wiederholen */
-  z-index: 1; /* Niedrigerer z-index als game-intro */
-  animation: scrollBackground 5s linear infinite; /* 10s ist die Dauer der Animation */
+  background-size: 100%;
+  background-repeat: repeat-x;
+  z-index: 1;
+  animation: scrollBackground 5s linear infinite;
 }
 
 /* Bird-Image */
@@ -128,23 +119,23 @@ body {
     background-position: 0 0;
   }
   100% {
-    background-position: -1000px 0; /* Stelle sicher, dass dies die Breite deines Bildes ist oder ein Vielfaches davon */
+    background-position: -1000px 0;
   }
 }
 
 @keyframes moveDing {
   0% {
-    right: -50px; /* Starte außerhalb des Bildschirms (Annahme, dass das Objekt 50px breit ist) */
+    right: -50px;
   }
   100% {
-    right: 100%; /* Bewege dich nach links außerhalb des Bildschirms */
+    right: 100%;
   }
 }
 /* Ding-Objekt */
 .ding {
   background: url("../images/ding.png") no-repeat center;
-  width: 100px; /* Verdoppelte Breite */
-  height: 300px; /* Verdoppelte Höhe */
+  width: 100px;
+  height: 300px;
   background-size: contain;
   position: absolute;
   top: 0;
@@ -156,8 +147,8 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100vw; /* Viewport-Breite */
-  height: 100vh; /* Viewport-Höhe */
+  width: 100vw;
+  height: 100vh;
   background-image: url("../images/loser.png");
   background-size: cover;
   background-repeat: no-repeat;
@@ -169,11 +160,10 @@ body {
   right: 10px;
   color: white;
   font-size: 24px;
-  z-index: 100; /* Stelle sicher, dass der Timer über anderen Spielelementen angezeigt wird */
+  z-index: 100;
 }
 #time-list {
-  list-style: none; /* Entfernt die Aufzählungszeichen */
-  color: white; /* Setzt die Textfarbe */
-  font-size: 18px; /* Setzt die Schriftgröße */
-  /* Füge weitere Stile hinzu, wie z.B. padding, margin, etc. */
+  list-style: none;
+  color: white;
+  font-size: 18px;
 }
