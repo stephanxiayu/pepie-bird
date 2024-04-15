@@ -8,15 +8,15 @@ class Ding {
 
   resetPosition() {
     const screenHeight = window.innerHeight;
-    const randomPosition = Math.floor(Math.random() * (screenHeight - 150)); // Verhindert, dass das Element zu weit unten erscheint
+    const randomPosition = Math.floor(Math.random() * (screenHeight - 150)); // that the obsticale goes to far out of the screen
     this.element.style.top = `${randomPosition}px`;
-    this.element.style.right = "-50px"; // Startet von rechts außerhalb des Bildschirms
+    this.element.style.right = "-50px"; // the obsticlale start from the right screen outside the screen
     this.move();
   }
 
   move() {
-    // Verwendet eine zufällige Dauer für die Animation, um Variation zu schaffen
-    const duration = Math.random() * 3 + 2; // Zwischen 2 und 5 Sekunden
+    // moving of the obsticale
+    const duration = Math.random() * 4 + 2; // Zwischen 2 und 5 Sekunden
     this.element.style.animation = `moveDing ${duration}s linear infinite`;
   }
 

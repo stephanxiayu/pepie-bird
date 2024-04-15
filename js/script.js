@@ -1,6 +1,8 @@
 // Hauptinitialisierung
 let game; // Definiere `game` im globalen Scope
 
+// start of everything
+
 window.onload = function () {
   const startButton = document.getElementById("start-button");
   const restartButton = document.getElementById("restart-button");
@@ -10,11 +12,12 @@ window.onload = function () {
   startButton.addEventListener("click", () => {
     game.start();
   });
-
+  // restart after lost the game
   restartButton.addEventListener("click", () => {
-    game.restart(); // Lade die Seite neu, um das Spiel neu zu starten
+    game.restart();
   });
 
+  //audio play
   document.body.addEventListener(
     "click",
     () => {
@@ -22,6 +25,9 @@ window.onload = function () {
     },
     { once: true }
   );
+
+  // the bird fly function by clicking the space botton
+
   document.addEventListener("keydown", (e) => {
     if (e.code === "Space") {
       if (game) {
@@ -32,5 +38,3 @@ window.onload = function () {
     }
   });
 };
-
-// Füge noch Event-Listener für die Tastatureingabe hinzu, um den Vogel zu steuern

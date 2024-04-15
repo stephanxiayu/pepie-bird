@@ -13,7 +13,7 @@ class Game {
     this.timerInterval = null;
     this.playTimes = []; // Speichert die Spielzeitens
   }
-
+  // start of the timer
   startTimer() {
     this.startTime = Date.now();
     this.timerInterval = setInterval(() => {
@@ -29,6 +29,8 @@ class Game {
     clearInterval(this.timerInterval);
     document.getElementById("timer").textContent = "0:00"; // Timer zurücksetzen
   }
+
+  // doesnt work so far
   checkCollision(element1, element2) {
     const rect1 = element1.getBoundingClientRect();
     const rect2 = element2.getBoundingClientRect();
@@ -40,6 +42,7 @@ class Game {
       rect1.top > rect2.bottom
     );
   }
+  // save the game time
   savePlayTime() {
     const elapsed = Date.now() - this.startTime; // Millisekunden seit Spielstart
     const secondsElapsed = Math.floor(elapsed / 1000); // Umwandlung in Sekunden
@@ -47,7 +50,7 @@ class Game {
     this.updateTimeList();
   }
 
-  // Aktualisiere die Liste auf dem Loser-Screen mit den gespeicherten Zeiten
+  // update the time scoor list
   updateTimeList() {
     const listElement = document.getElementById("time-list");
     listElement.innerHTML = ""; // Lösche die bestehenden Listeneinträge
@@ -66,18 +69,19 @@ class Game {
       listElement.appendChild(listItem);
     });
   }
+
+  // start of the game
   start() {
-    // Verstecke das Intro und zeige das Spiel
     this.gameIntro.style.display = "none";
     this.gameContainer.style.display = "block";
     this.startTimer();
     setInterval(() => this.addDing(), 2000);
-    // Starte die Game-Loop
+
     this.audioManager.stopStartscreenAudio();
     this.gameLoopIntervalId = setInterval(this.gameLoop.bind(this), 1000 / 60);
     this.audioManager.playBackgroundAudio();
   }
-
+  // gameloob whats happend when the bird fall out of the screen
   gameLoop() {
     this.bird.updatePosition(this.gravity);
 
@@ -85,7 +89,7 @@ class Game {
       this.endGame();
     }
   }
-
+  // the green obsticale
   addDing() {
     const ding = new Ding(this.gameContainer);
     this.dings.push(ding);
@@ -98,35 +102,31 @@ class Game {
     }, 5000); // Stelle sicher, dass dies länger ist als die längste Animationsdauer
   }
 
+  // whats happend when the game end
   endGame() {
     clearInterval(this.gameLoopIntervalId);
     this.gameContainer.style.display = "none";
     this.gameLoserScreen.style.display = "block";
     this.gameIsOver = true;
-    this.savePlayTime(); // Speichere die aktuelle Spielzeit
+    this.savePlayTime();
     this.stopTimer();
     this.audioManager.stopBackgroundAudio();
     this.audioManager.playLoserAudio();
   }
 
+  // restrt the gamne after you lose
   restart() {
-    // Stoppe jegliche Spiel-Loop-Intervalle oder Animation Frames
     this.gameIsOver = false;
     clearInterval(this.gameLoopIntervalId);
 
-    // Setze alle Spielvariablen zurück
     this.bird.reset();
-    // Setze weitere Spielzustände zurück, wie die Position der Hindernisse etc.
 
-    // Verstecke den Game-Loser-Screen und zeige den Game-Container
     this.gameLoserScreen.style.display = "none";
     this.gameContainer.style.display = "block";
 
-    // Stelle sicher, dass Audios richtig gesteuert werden
     this.audioManager.stopLoserAudio();
-    // this.audioManager.playGameAudio();
+    this.audioManager.playGameAudio();
 
-    // Starte das Spiel erneut
     this.start();
   }
 }
